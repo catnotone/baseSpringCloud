@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: point-server
+  config:
+    import: nacos:point-server-dev.yml
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+
+# 日志配置
+logging:
+  level:
+    org.huangge.pointserver: DEBUG
+    com.alibaba.nacos: INFO

@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: order-service
+  config:
+    import: nacos:order-service-dev.yml
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+
+    openfeign:
+      client:
+        config:
+          default:
+            connect-timeout: 5000
+            read-timeout: 5000
+
+# Feign Client配置
+feign:
+  client:
+    config:
+      point-server:  # 这里要跟服务名一致
+        connect-timeout: 5000
+        read-timeout: 5000
+# 日志配置
+logging:
+  level:
+    org.huangge.pointserver: DEBUG
+    com.alibaba.nacos: INFO
