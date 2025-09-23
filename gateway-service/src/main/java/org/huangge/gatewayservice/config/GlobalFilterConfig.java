@@ -23,11 +23,11 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class GlobalFilterConfig implements GlobalFilter, Ordered {
     //application.yml配置文件中，设置token在redis中的过期时间
-    @Value("${config.redisTimeout}")
-    private Long redisTimeout;
+//    @Value("${config.redisTimeout}")
+//    private Long redisTimeout;
 
-    @Autowired
-    private RedisTemplate redisTemplate;
+//    @Autowired
+//    private RedisTemplate redisTemplate;
 
     private static final String HEADER_NAME = "Authorization";
 
@@ -60,14 +60,14 @@ public class GlobalFilterConfig implements GlobalFilter, Ordered {
             return unAuthorize(exchange);
         }
         //验证redis中是否存在token
-        if(!redisTemplate.hasKey("token:" +token)){
-            return unAuthorize(exchange);
-        }
-
-        //验证通过，刷新token过期时间
-        redisTemplate.expire(token,redisTimeout,TimeUnit.SECONDS);
-        String userId = String.valueOf(redisTemplate.opsForValue().get(token));
-        System.out.println("============登录用户id："+userId+"============");
+//        if(!redisTemplate.hasKey("token:" +token)){
+//            return unAuthorize(exchange);
+//        }
+//
+//        //验证通过，刷新token过期时间
+//        redisTemplate.expire(token,redisTimeout,TimeUnit.SECONDS);
+//        String userId = String.valueOf(redisTemplate.opsForValue().get(token));
+//        System.out.println("============登录用户id："+userId+"============");
         //把新的 exchange放回到过滤链
         ServerHttpRequest newRequest = request.mutate().header(HEADER_NAME, token).build();
         ServerWebExchange newExchange = exchange.mutate().request(newRequest).build();
@@ -101,7 +101,9 @@ public class GlobalFilterConfig implements GlobalFilter, Ordered {
      * @return 是返回true，否返回false。
      */
     private boolean shouldNotFilter(String url) {
-        return WHITE_LIST.stream().anyMatch(url::startsWith);
+
+//        return WHITE_LIST.stream().anyMatch(url::startsWith);
+        return true;
     }
 
 }
