@@ -10,6 +10,10 @@ spring:
 
 
   cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
     nacos:
       discovery:
         server-addr: localhost:8848
@@ -21,3 +25,10 @@ logging:
   level:
     org.huangge.pointserver: DEBUG
     com.alibaba.nacos: INFO
+    com.alibaba.csp.sentinel: TRACE
+    com.alibaba.csp.sentinel.slots.block.flow: DEBUG
+    com.alibaba.csp.sentinel.slots.block.flow.param: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.web.filter: DEBUG
+    org.springframework.web.servlet: DEBUG
+    org.springframework.web.HttpLogging: DEBUG

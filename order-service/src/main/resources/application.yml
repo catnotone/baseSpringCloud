@@ -5,6 +5,10 @@ spring:
     import: nacos:order-service-dev.yml
 
   cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
     nacos:
       discovery:
         server-addr: localhost:8848

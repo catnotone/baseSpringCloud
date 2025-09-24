@@ -3,10 +3,10 @@ spring:
     name: gateway-service
   config:
     import: nacos:gateway-service-dev.yml
-#    redis:
-#      port: 6379
-#      host: localhost
-#      password: 123456
+    redis:
+      port: 6379
+      host: localhost
+      password: 123456
 
 
   cloud:
@@ -46,6 +46,8 @@ spring:
             - Path=/user/** #断言，路径相匹配进行路由
           filters:
             - StripPrefix=1
+      default-filters:
+        - AddRequestHeader=origin,gateway  # 添加名为origin的请求头，值为gateway
     nacos:
       discovery:
         server-addr: localhost:8848
